@@ -20,13 +20,6 @@ class Component implements Module {
 	
 	public function __construct($componentName, $arParams, $arOptions = array()) {
 		$this->$moduleName = "Компоненты модели";
-		foreach ($this->arOptList as $optName => $defOoptVal) {
-			if (is_array($defOoptVal)) {
-				$this->addOption($optName, $arOptions[$optName] ? $arOptions[$optName] : $defOoptVal["val"], $defOoptVal["ar"]);
-			} else {
-				$this->addOption($optName, $arOptions[$optName] ? $arOptions[$optName] : $defOoptVal);
-			}
-		}
 		parent::__construct($arOptions);
 		$this->includeComponent($componentName, $arParams);
 	}

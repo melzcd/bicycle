@@ -2,13 +2,21 @@
 class Module {
 	private $arOptions = Array();
 	private $moduleName = "Lis";
+	private $arOptList = Array();
 	
 	public function __construct ($arOptions) {
 		if (!is_array($arOptions)) {
 			$arOptions = array();
 		}
-		foreach ($arOptions as $optName => $optVal) {
-			$this->setOptVal($optName, $optVal);
+		foreach ($this->arOptList as $optName => $defOoptVal) {
+			if (is_array($defOoptVal)) {
+				$this->addOption($optName, $arOptions[$optName] ? $arOptions[$optName] : $defOoptVal["val"], $defOoptVal["ar"]);
+			} else {
+				$this->addOption($optName, $arOptions[$optName] ? $arOptions[$optName] : $defOoptVal);
+			}
+			if (array_key_exists($optName, $arOptions)) {
+				$this->setOptVal($optName, $arOptions[$optName]);
+			}
 		}
 	}
 	
